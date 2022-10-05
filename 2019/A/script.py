@@ -1,82 +1,71 @@
-# NOTE:
-'''
-FOR INPUT:
-4
-3 15
-6 5 26
-3 15
-6 5 27
-2 1000000000
-500123123 497000000
-7 2
-6 2 4 1 9 3 12
-
-SCRIPTS RETURNS:
-2
--1
-0
-6
-
-EXPECTED OUTPUT:
-2
--1
-0
-4
-
-'''
-# ------------------------------------------------------------------------
+import numpy as np
 
 class Data:
     def __init__(self, n : int, k : int, a : list):
-        
-        # NOTE: N is NECESSARY ?
-        self._n = n             # Amount of planets
-        
-        self._k = k             # Amount of starships
-        self._a = a             # Planets' amounts of citizens
-        self._conquered = []    # Conquered planets' Amounts of citizens
-        self._result = 0        # Amount of mobilisations
+        self._n = n
+        self._k = k                                     # Amount of starships
+        self._a = a                                     # Planets' amounts of citizens
+        self._conquered = np.zeros((n,), dtype=int)     # Planets' states: 1 - conquered; 0 - non-conquered
+        self._result = 0                                # Amount of mobilisations
 
-    def _invasion(self, m : int):
-        self._conquered.append((2 * m))
-        self._k = self._k - (m)
-        self._conquered.sort()
+    def _invasion(self, i : int):
+        self._conquered[i] = 1
+        self._k = self._k - (self._a[i])
+        self._a[i] = 2 * self._a[i]
     
     def _mobilisation(self):
-        self._k = self._k + self._conquered[-1]
-        self._conquered[-1] = 0
-        self._conquered.sort()
+        index = 0
+        max_val = 0
+        # Searching for max amount of starship to mobilize
+        for i in range(self._n):
+            if self._a[i] > max_val and self._conquered[i] == 1:
+                index = i
+                max_val = self._a[i]
+        
+        # If there is no starship to mobilize
+        if max_val == 0:
+            return False
+        
+        self._k = self._k + self._a[index]
+        self._a[index] = 0
         self._result += 1
+        return True
 
     def execute(self):
+        
+        # If enconquer all the planets is possible
+        if sum(self._a) <= self._k:
+            return 0
+        
+        # Sort planet from min to max
         self._a.sort()
         
-        # If any invasion is possible
-        if (self._a[0] < self._k):
+        while True:
             
             # For every planet
-            for m in self._a:
+            for i in range(self._n):
                 
-                # If invasion is possible
-                if m <= self._k:
-                    self._invasion(m)
+                # If next planet is available to conquer
+                if i < self._n -1 and self._a[i+1] <= self._k:
                     continue
+                
+                # If certain planet is available to conquer
+                if self._a[i] <= self._k:
+                    self._invasion(i)
                     
-                while True:
-                    # If mobilisation is not possible
-                    if self._conquered[-1] == 0:
-                        return -1
+                    # Check the previous planets
+                    for j in range(i, -1, -1):
+                        if self._a[j] <= self._k:
+                            self._invasion(j)
                     
-                    self._mobilisation()
-                    
-                    # If invasion is possible
-                    if m <= self._k:
-                        self._invasion(m)
-                        break
+                    # If there are still planets to conquer
+                    if 0 in self._conquered:
+                        # If mobilisation is not possible
+                        if not self._mobilisation():
+                            return -1
                         
-            return self._result
-        
-        return -1
+                    # If all the planets are conquered
+                    return self._result
 
 
 def main():
