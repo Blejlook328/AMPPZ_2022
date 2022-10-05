@@ -1,57 +1,27 @@
 # NOTE:
 '''
+FOR INPUT:
+4
+3 15
+6 5 26
+3 15
+6 5 27
+2 1000000000
+500123123 497000000
+7 2
+6 2 4 1 9 3 12
 
-DATA:
------
-n - planets
-a[] - planets' citizens
+SCRIPTS RETURNS:
+2
+-1
+0
+6
 
-k - starships
-
-    INVASION:
-        s - starships to certain planet
-        m - certain planet's citizens
-        
-        s > m
-        
-        AFTER:
-        
-        a[x] - m + s;   x - index of certain planet
-        s = 0
-    
-    MOBILIZATION:
-        k = k + a[x];   x - index of certain planet
-        a[x] = 0
-
-    GOAL:
-        Minimal amount of mobilizations to conqer all the planets
-        
---------------------------------------
-
-INPUT:
-------
-
-data.length()
-
-data[0]:
-    n k
-    a[0] ... a[n-1]
-
-...
-
-data[data.length() - 1]:
-    n k
-    a[0] ... a[n-1]
-
-
-OUTPUT:
--------
-
-Minimal amount of mobilizations for the certain data
-
-OR
-
--1 if not possible
+EXPECTED OUTPUT:
+2
+-1
+0
+4
 
 '''
 # ------------------------------------------------------------------------
@@ -68,8 +38,8 @@ class Data:
         self._result = 0        # Amount of mobilisations
 
     def _invasion(self, m : int):
-        self._conquered.append((2 * m + 1))
-        self._k = self._k - (m + 1)
+        self._conquered.append((2 * m))
+        self._k = self._k - (m)
         self._conquered.sort()
     
     def _mobilisation(self):
