@@ -58,21 +58,52 @@ OR
 
 class Data:
     def __init__(self, n : int, k : int, a : list):
-        self._n = n
-        self._k = k
-        self._a = a
+        self._n = n             # Amount of planets
+        self._k = k             # Amount of starships
+        self._a = a             # Planets' amounts of citizens
+        self._conquered = []    # Conquered planets' Amounts of citizens
+        self._result = 0        # Amount of mobilisations
+
+    def _invasion(self, m : int):
+        self._conquered.append((2 * m + 1))
+        self._k = self._k - (m + 1)
+        self._conquered.sort()
+    
+    def _mobilisation(self):
+        self._k = self._k + self._conquered[-1]
+        self._conquered[-1] = 0
+        self._conquered.sort()
+        self._result += 1
 
     def execute(self):
         self._a.sort()
         
-        if (self._a[0] <= self._k):
-            return 0
+        # If any invasion is possible
+        if (self._a[0] < self._k):
+            
+            # For every planet
+            for m in self._a:
+                
+                # If invasion is possible
+                if m <= self._k:
+                    self._invasion(m)
+                    continue
+                    
+                while True:
+                    # If mobilisation is not possible
+                    if self._conquered[-1] == 0:
+                        return -1
+                    
+                    self._mobilisation()
+                    
+                    # If invasion is possible
+                    if m <= self._k:
+                        self._invasion(m)
+                        break
+                        
+            return self._result
+        
         return -1
-
-    def run(self):
-        result = self.execute()
-        print(result)
-
 
 
 def main():
@@ -80,7 +111,7 @@ def main():
     amount = int(input())
     
     # Objects list init
-    data_list = []
+    results = []
     
     # Getting input
     for i in range(amount):
@@ -94,21 +125,18 @@ def main():
         # Creating data set object
         data = Data(n, k, a)
         
-        # Adding to list
-        data_list.append(data)
+        # Execute algorithm on data set and save result
+        results.append(data.execute())
     
     # Delete unnecessary variables
-    del n, k, a, line, amount
+    del n, k, a, line, data, amount
     
-    for data in data_list:
-        # Algorithm on certain data set and get output
-        data.run()
+    # Print all results
+    for result in results:
+        print(result)
         
-        # Delete executed data set
-        del data
-        
-    # Delete empty list
-    del data_list
+    # Delete results list
+    del results
         
 
 if __name__ == '__main__':
