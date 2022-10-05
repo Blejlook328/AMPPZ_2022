@@ -30,9 +30,7 @@ class Day:
         return places
 
 
-def examine(begin : int, places : list, health : int):
-    result = -1
-    
+def examine(begin : int, places : list, health : int):    
     for p in range(begin - 1, len(places)):
         death, health = places[p].explore(health)
         if death:
