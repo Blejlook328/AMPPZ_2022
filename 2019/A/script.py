@@ -58,7 +58,10 @@ OR
 
 class Data:
     def __init__(self, n : int, k : int, a : list):
+        
+        # NOTE: N is NECESSARY ?
         self._n = n             # Amount of planets
+        
         self._k = k             # Amount of starships
         self._a = a             # Planets' amounts of citizens
         self._conquered = []    # Conquered planets' Amounts of citizens
