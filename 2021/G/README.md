@@ -1,4 +1,4 @@
-# **Zadanie G**: Gebajta 
+# **Zadanie G**: Glątwa Gebajta 
 
 ## *Limit czasowy: 12s, limit pamięciowy: 1024 MB*
 
