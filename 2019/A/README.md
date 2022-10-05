@@ -24,6 +24,19 @@ trzeba dokonać, aby opanować wszystkie planety.
 
 ## **Wejście**
 
+Pierwsza linia wejścia zawiera liczbę zestawów danych 𝑧 (1 <= 𝑧 <= 30). Potem kolejno
+podawane są zestawy w następującej postaci:
+
+Pierwsza linia zestawu zawiera dwie liczby całkowite 𝑛 i 𝑘 (1 <= 𝑛 <= 200 000; 1 <= 𝑘 <= 109
+)
+– liczbę planet i rozmiar początkowej armii Obcych. Druga linia zawiera 𝑛 liczb całkowitych
+𝑎1, . . . , 𝑎𝑛 (1 <= 𝑎𝑖 <= 10^9
+) – liczbę mieszkańców na poszczególnych planetach.
+
+Suma wartości 𝑛 we wszystkich zestawach danych nie przekroczy 500 000.
+
+## **Wyjście**
+
 Dla każdego zestawu danych wypisz w osobnej linii jedną liczbę całkowitą: najmniejszą liczbę
 operacji mobilizacji koniecznych do opanowania wszystkich 𝑛 planet. Jeśli asymilacja całego
 systemu nie jest możliwa, wypisz −1.
