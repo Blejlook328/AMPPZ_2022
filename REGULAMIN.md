@@ -9,13 +9,6 @@ rodzaju rywalizacji oraz pomagają przygotować się do ewentualnego uczestnictw
 
 ___
 
-## Poprzednie Edycje
-
-### *2019*: https://amppz.tcs.uj.edu.pl/2019/data.html
-### *2021*: http://amppz.tcs.uj.edu.pl/2021/data.html
-
-___
-
 ## Uczestnictwo w zawodach
 1. W zawodach biorą udział zespoły (drużyny), składające się maksymalnie z trzech osób - studentów jednej uczelni w Polsce.
 

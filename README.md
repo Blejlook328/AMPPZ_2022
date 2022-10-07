@@ -1,6 +1,12 @@
 # Akademickie Mistrzostwa Polski w Programowaniu Zespołowym 2022
 
-## Ćwiczenia indywidualne i zespołowe
+
+## **Poprzednie Edycje**
+
+### ***2019***: https://amppz.tcs.uj.edu.pl/2019/data.html
+### ***2021***: http://amppz.tcs.uj.edu.pl/2021/data.html
+
+___
 
 ### **Język programowania:** Python, C lub C++
 
