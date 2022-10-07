@@ -2,6 +2,24 @@
 
 ## Ćwiczenia indywidualne i zespołowe
 
-### **Język programowania:** Python
+### **Język programowania:** Python, C lub C++
 
-### Repozytorium stworzone z myślą przerobienia zadań, które ukazały się w poprzednich edycjach konkursu (2019, 2021).
+___
+
+# Struktura repozytorium
+
+    <EDYCJA>\:
+    |-- <zadanie>\:
+       |-- <treść_zadania.pdf>
+       |-- <treść_zadania.md>
+       |-- <skrypt>
+    
+    <EDYCJA>\:
+    |-- ...
+
+# Konwencja nazewnictwa
+
+Dodając do repozytorium propozycję rozwiązania danego zadania,
+do nazwy danego pliku z kodem źródłowym dodać prefix ze swoimi inicjałami, np.:
+
+> BS_script.py 
