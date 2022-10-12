@@ -1,6 +1,6 @@
 import numpy as np
 
-class Data:
+class Scenario:
     def __init__(self, n : int, k : int, a : list):
         self._n = n
         self._k = k                                     # Amount of starships
@@ -31,6 +31,12 @@ class Data:
         self._result += 1
         return True
 
+    def _get_next_unconquered(self, index : int):
+        for i in range(index + 1, self._n):
+            if self._conquered[i] == 0:
+                return self._a[i]
+        return self._k + 1
+        
     def execute(self):
         
         # If enconquer all the planets is possible
@@ -42,30 +48,30 @@ class Data:
         
         while True:
             
-            # For every planet
             for i in range(self._n):
                 
-                # If next planet is available to conquer
-                if i < self._n -1 and self._a[i+1] <= self._k:
+                if self._conquered[i] == 1:
                     continue
                 
-                # If certain planet is available to conquer
+                if i < self._n - 1 and self._get_next_unconquered(i) <= self._k:
+                    continue
+                
                 if self._a[i] <= self._k:
                     self._invasion(i)
                     
-                    # Check the previous planets
                     for j in range(i, -1, -1):
                         if self._a[j] <= self._k:
                             self._invasion(j)
+                
+                if 0 in self._conquered:
                     
-                    # If there are still planets to conquer
-                    if 0 in self._conquered:
-                        # If mobilisation is not possible
-                        if not self._mobilisation():
-                            return -1
+                    if self._mobilisation():
                         
-                    # If all the planets are conquered
-                    return self._result
+                        break
+                    
+                    return -1
+                
+                return self._result
 
 
 def main():
@@ -85,13 +91,13 @@ def main():
         a = [eval(j) for j in line]
 
         # Creating data set object
-        data = Data(n, k, a)
+        scenario = Scenario(n, k, a)
         
         # Execute algorithm on data set and save result
-        results.append(data.execute())
+        results.append(scenario.execute())
     
     # Delete unnecessary variables
-    del n, k, a, line, data, amount
+    del n, k, a, line, scenario, amount
     
     # Print all results
     for result in results:
@@ -99,7 +105,7 @@ def main():
         
     # Delete results list
     del results
-        
+
 
 if __name__ == '__main__':
     main()
