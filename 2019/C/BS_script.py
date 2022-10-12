@@ -7,16 +7,23 @@ class Set:
         return f'{self._n} : {self._l}'
     
     def execute(self):
+        
         if self._n < 3:
             return 0
-        elif self._n == 3:
-            if self._l[0] > self._l[1] + self._l[2] and self._l[1] > self._l[0] + self._l[2] and self._l[2] > self._l[0] + self._l[1]:
-                return sum(self._l)
-            else:
-                return 0
-        else:
-            # TODO: Check condition of creation the figure
-            raise NotImplementedError
+
+        self._l.sort()
+
+        i = -1
+        while True:
+            if (self._n + i == 0):
+                break
+            if self._l[i] < sum(self._l[:i]):
+                if i == -1:
+                    return sum(self._l)
+                return sum(self._l[:i+1])
+            i = i - 1
+        return 0
+            
 
 def main():
     amounts = int(input())
